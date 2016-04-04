@@ -1,0 +1,1934 @@
+
+INHERITANCE IN JAVA:ILLUSTRATES THE USE OF 'super'KEYWORD.
+
+package helloworld;
+
+public class Animal {
+
+	  int size;
+	public void eat()
+	{
+		System.out.println("eat food");
+
+	}
+	public void prey()
+	{
+		System.out.println("hunt for food");
+	}
+
+}
+
+
+public class Dog extends Animal {
+
+
+	public void eat()//method overriding
+	{
+		super.eat();// when we use super then jvm first goes to the inherited 
+                                eat() method in the superclass then it comes to its own eat()
+		System.out.println("eat grass");
+	}
+	public void setSize(int size)
+	{    
+		if(size>20)
+			this.size=size;
+		else
+			this.size=0;
+
+	}
+	public int getSize()
+	{
+		return size;
+	}
+
+}
+
+
+public class driver {
+
+	public static void main(String[] args) {
+		Dog d=new Dog();
+		d.setSize(25);
+		System.out.println(d.getSize());
+		d.eat();
+		d.prey();
+
+	}
+
+}
+OUTPUT:
+25
+eat food
+eat grass
+hunt for food
+
+POLYMORPHISM:
+Animal obj=new Dog()// if the object that the reference variable is pointing to extends the refe variable type then
+polymorphism is used as shown above.
+
+package helloworld;
+
+public class Animal {
+
+	  int size;
+	public void eat()
+	{
+		System.out.println("eat food");
+
+	}
+	public void prey()
+	{
+		System.out.println("hunt for food");
+	}
+
+}
+
+
+
+package helloworld;
+
+public class Dog extends Animal {
+
+
+	public void eat()//method overriding
+	{
+		System.out.println("eat grass");
+	}
+	public void setSize(int size)
+	{    
+		if(size>20)
+			this.size=size;
+		else
+			this.size=0;
+
+	}
+	public int getSize()
+	{
+		return size;
+	}
+
+}
+package helloworld;
+
+public class cat extends Animal{
+
+	public void eat()
+	{
+		System.out.println("cat eats bullcrap");
+	}
+
+}
+package helloworld;
+
+public class driver {
+
+	public static void main(String[] args) {
+		Animal[] obj=new Animal[2];
+		obj[0]=new Dog();//POLYMORPHISM
+		obj[1]=new cat();
+		for(int i=0;i<obj.length;i++)
+		{
+			obj[i].eat();
+			obj[i].prey();
+		}
+	}
+
+}
+OUTPUT:
+eat grass
+hunt for food
+cat eats bullcrap
+hunt for food
+
+POLYMORMHISM USING POLYMORPHIC ARGUMENTS:
+package helloworld;
+
+public class Animal {
+
+
+	public void makeNoise()
+	{
+		System.out.println("make animal noise");
+
+	}
+
+
+}
+
+public class Dog extends Animal {
+
+	public void makeNoise()
+	{
+		System.out.println("bark");
+		
+	}
+
+}
+
+public class cat extends Animal{
+
+	public void makeNoise()
+	{
+		System.out.println("meow");
+	}
+
+}
+public class Pet {
+
+	public void makeSound(Animal d)
+	{
+		d.makeNoise();
+	}
+
+
+}
+public class driver {
+
+	public static void main(String[] args) {
+		Dog d=new Dog();
+		cat c=new cat();
+		Pet p =new Pet();
+		p.makeSound(d);
+		p.makeSound(c);
+	}
+
+}
+OUTPUT:
+bark
+meow
+
+METHOD OVERLOADING:
+package akash;
+
+public class example {
+
+	public static void main(String[] args) {
+		example obj=new example();
+		obj.beTrouble(6, "akash");
+		System.out.println(obj.beTrouble(6, 3));
+
+
+
+	}
+
+
+	public void beTrouble(int x,String y)//method overloading
+	{
+		System.out.println("the integer is:"+x +"and the string is:" +y);
+	}
+	public int beTrouble(int y,int x)
+	{
+		return x+y;
+	}
+
+}
+OUTPUT:
+the integer is:6and the string is:akash
+9
+
+CONSTRUCTOR CHAINING:SUPERCLASS CONSTRUCTORS
+package helloworld;
+
+public class Animal {
+
+
+	public Animal()
+	{
+		System.out.println("Animal:superclass");
+
+	}
+
+
+}
+public class Dog extends Animal {
+
+	public Dog()
+	{
+		System.out.println("Dog:subclass1");
+		
+	}
+
+}
+
+public class Pet extends Dog {
+int size;
+  public Pet()
+  {
+	  System.out.println("Pet:subclass2");
+  }
+
+public static void main(String...args){
+  Pet obj=new Pet();
+}
+
+}
+
+Animal:superclass
+Dog:subclass1
+Pet:subclass2
+
+PARAMETERIZED SUPER:
+package helloworld;
+
+public class Animal {
+	private int size;
+
+	public Animal(int size)
+	{
+		this.size=size;
+	}
+	public int getSize()
+	{
+		return size;
+	}
+
+}
+public class Dog extends Animal {
+
+	public Dog(int measure)
+	{
+		super(measure);//parameterized super calls the overloaded superclass constructor.
+    }
+
+}
+public class driver {
+
+	public static void main(String[] arg){
+	  Dog obj=new Dog(25);
+	  System.out.println(obj.getSize());
+	  
+
+	}
+
+}
+OUTPUT:
+25
+
+USE OF THIS KEYWORD:
+package helloworld;
+
+public class Animal {
+	private float size;
+
+	public Animal(int length)
+	{  this(length+30.5f);//This keyword is used to call other overloaded constructors in the same class.
+
+	}
+	public Animal(float size)
+	{
+		this.size=size;
+	}
+
+	public float getSize()
+	{
+		return size;
+	}
+	
+}
+package helloworld;
+
+public class Dog extends Animal {
+   
+	
+	public Dog(int measure)
+	{
+		super(measure);
+    }
+
+}
+public class driver {
+
+	public static void main(String[] arg){
+	  Dog obj=new Dog(25);
+	  System.out.println(obj.getSize());
+	  
+
+	}
+
+}
+OUTPUT:
+55.5
+
+PROGRAM TO FIND THE LARGEST STRING IN AN ARRAY OF STRINGS:
+package akash;
+
+public class example {
+
+	public static void main(String[] args) {
+
+		String[] s={"palindrome","succint","supercalifrigilistic","armstrong"};
+		int max=0;
+
+		for(int i=0;i<s.length;i++)
+		{
+			if(s[i].length()>s[max].length())
+				max=i;
+
+		}
+		System.out.println(s[max]);
+
+
+	}
+
+}
+OUTPUT:
+supercalifrigilistic
+
+USE OF SUBSTRING:
+string.substring(int beginindex)-beginindex is inclusive
+string.substring(int beginindex,int endindex)-end index is exclusive
+
+public class problem14 {
+
+	public static void main(String[] args) {
+		String g="akash";
+		System.out.println(g.substring(2));
+		System.out.println(g.substring(2,4));
+	  
+		
+
+	}
+
+}
+OUTPUT:
+ash
+as
+
+IMPLEMENT FUNCTIONALITY OF THESE INBUILT FUNCTIONS ON YOUR OWN:
+charAt()
+import java.util.Scanner;
+
+//implementing charAt using own logic
+public class problem142 {
+
+	public static void main(String[] args) {
+		String s="akash";
+		Scanner obj=new Scanner(System.in);
+		System.out.println("enter the position you want");
+		int k=obj.nextInt();
+		problem142 obs=new problem142();
+		String x=obs.charExtract(s,k);
+		System.out.println(x);
+		obj.close();
+
+
+	}
+	public String charExtract(String s,int k)
+	{
+		if(k>=s.length())
+			return "exceeded string length";
+		else
+			return s.substring(k,k+1);
+	}
+
+}
+OUTPUT:
+enter the position you want
+3
+s
+
+//implementing replace() using own logic:
+import java.util.Scanner;
+public class problem143 { //implementing replace() function using own logic
+
+	public static void main(String[] args) {
+		String s="akash is great";
+		char c[]=s.toCharArray();
+		Scanner in=new Scanner(System.in);
+		System.out.println("enter the character you want replaced:");
+		char m=in.next().charAt(0);
+		System.out.println("enter the character you want to insert");
+		char h=in.next().charAt(0);
+
+		problem143 obj=new problem143();
+		obj.myReplace(c,m, h);
+
+		s=String.valueOf(c);
+		System.out.println(s);
+
+
+
+	}
+	public void myReplace(char []c,char m,char h){
+
+		for(char k=0;k<c.length;k++)
+		{
+			if(c[k]==m)
+				c[k]=h;
+
+		}
+	}
+
+}
+OUTPUT:
+enter the character you want replaced:
+a
+enter the character you want to insert
+r
+rkrsh is grert
+
+//implement substring() using my own logic:
+import java.util.Scanner;
+//program to implement substring(int beginIndex) with my own logic
+public class problem144 {
+
+	public static void main(String[] args) {
+		String s="akash";
+		Scanner obj=new Scanner(System.in);
+		System.out.println("enter the position you want");
+		int x=obj.nextInt();
+		try{
+		char c[]=new char[s.length()-x];;
+		int k=0;
+		subString(c, x, k, s);
+		s=new String(c);
+		System.out.println(s);
+		}
+		catch(Exception e)
+		{
+			System.out.println("index out of bounds");
+		}
+
+	}
+	public static void subString(char c[],int x,int k,String s)
+	{
+		for(int i=x;i<s.length();i++)
+		{
+			c[k]=s.charAt(i);
+			k++;
+		}	
+	}
+}
+OUTPUT:
+enter the position you want
+2
+ash
+
+THIS KEYWORD:
+public class example1 {
+
+	public example1()
+	{   
+	System.out.println("no arg");
+	}
+	public example1(int a,int b)
+	{   this(a+b);
+	System.out.println("2 arg");
+	}
+	public example1(int a)
+	{   this();
+		System.out.println("1 arg");
+	}
+
+	public static void main(String[] args) {
+
+		example1 obj=new example1(3,5);
+
+	}
+
+}
+OUTPUT:
+no arg
+1 arg
+2 arg
+USE OF STATIC BLOCKS:
+package akash;
+
+public class example1 {
+
+	static int x;
+	static { //static blocks are executed before main() and are executed in the order they are written.
+		x=32;
+		System.out.println(x);
+
+	}
+	public static void main(String[] args) {
+
+		  x++;
+                 System.out.println(x);
+		 show();
+	}
+	public static void show()
+	{
+		x++;
+		System.out.println(x);
+	}
+	static
+	{
+		x++;
+		System.out.println(x);
+	}
+
+}
+OUTPUT:
+32
+33
+34
+35
+
+RUNTIME POLYMORPHISM:
+package akash;
+
+class Cricket1 {
+	public void type(){
+		System.out.println("Indoor & outdoor");
+	}
+ }
+public class example1 extends Cricket1{
+	public void type(){
+		System.out.println("Method Overridden");
+	}
+	public void show(){
+		System.out.println("hello");
+	}
+	public static void main(String args[]){
+		Cricket1 ck=new example1();//creating parent ref variable pointing to child class(this ref var can access only those methods of child which
+		ck.type();                   are also present in parent.
+		//ck.show();//this will show compile time error as method show is not defined in parent class.
+                     so using runtime polymorphism you can access only those methods of child which are defined in the 
+                     parent class.
+	}
+}
+OUTPUT:
+Method overridden
+
+FINALIZE() AND GARBAGE COLLECTOR:
+public class example1{
+	
+	public static void main(String args[]){
+		example1 obj=new example1();
+		obj=null;
+		System.gc();
+	}
+		
+		protected void finalize()//if we want to do some work before our object is trashed by the GC we use 
+                                           finalize.It is declared protected inside a class.
+		{   
+			System.out.println("garbage collector");
+		}
+		
+}
+OUTPUT:
+garbage collector
+
+THIS ILLUSTRATES THE USE OF GC
+public class example1{
+	
+	public static void main(String args[]){
+		example1 obj=new example1();
+		obj.show();
+	         obj=null;
+		System.gc();
+		obj.show();
+	}
+		public void show()
+		{
+			System.out.println("show");
+		}
+		protected void finalize()
+		{   
+			System.out.println("garbage collector");
+		}
+		
+	}
+
+OUTPUT:
+show
+garbage collector
+Exception in thread "main" java.lang.NullPointerException
+	at akash.example1.main(example1.java:11)
+
+
+ABSTRACT CLASS:
+package akash;
+//its a way of defining a generic function which can be implemented in diferent ways.
+cannot achieve 100% abstraction.
+abstract class parent{ 
+      int x;//can have member variables
+	abstract void area(int radius);//may or may not contain abstract methods
+
+	public void print()//can have normal methods
+	{
+		System.out.println("hello");
+	}
+	parent()//can have constructors
+	{
+		System.out.println("abstract constructor");
+	}
+
+}
+public class example1 extends parent{//this class must implement the abstract method or declare itself abstract as well.
+
+	void area(int x )
+	{
+		System.out.println(x);
+	}
+
+	public static void main(String args[]){
+		parent obj=new example1();//cannot create instance of abstract class.
+		obj.area(20);
+		obj.print();
+	}//abstract classes can have static methods and variables which can be accessed using classname.method()/variable
+}
+OUTPUT:
+abstract constructor
+20
+hello
+
+INTERFACE:
+Used to achieve complete abstraction and multiple inheritance.
+package akash;
+
+interface Moveable{
+	 int avg_speed=40;//any declaration is final
+	 void move();//will have methods which are abstract.
+	
+}
+public class example1 implements Moveable{
+
+	public void move()//an instantiable class must implement all methods inside an interface.An abstract class may
+                          not implement all methods.
+	{
+		System.out.println("i am moving");
+	}
+
+	public static void main(String args[]){
+	example1 obj=new example1();
+		obj.move();
+
+	}
+}
+OUTPUT:
+i am moving
+
+package akash;
+
+interface Moveable{
+	 int avg_speed=40;
+	 void move();
+	
+}
+abstract class example1 implements Moveable{
+	//an abstract class may not implement all abtract methods of the interface.
+	public static void main(String args[]){
+	XX obj=new XX();
+	obj.move();
+
+	}
+}
+ class XX extends example1{//this class must implement the abtract method.
+	public void move()
+	{
+		System.out.println("move");
+	}
+ }
+
+OUTPUT:
+move
+
+HOW TO ACHIEVE MULTIPLE INHERITANCE USING INTERFACE;
+package akash;
+
+interface Moveable{
+	 int avg_speed=40;
+	 boolean move();
+	
+}
+interface NonMoveable{
+	boolean nonMove();
+}
+ class example1 implements Moveable,NonMoveable{
+	
+	 public boolean move()
+	 {
+		 return true;
+	 }
+	 public boolean nonMove()
+	 {
+		 return false;
+	 }
+	 
+	 
+	public static void main(String args[]){
+	example1 obj=new example1();
+	System.out.println(obj.move() + " "+ obj.nonMove());
+	}
+}
+ 
+OUTPUT:
+true false
+
+THE toString() METHOD:
+Returns the string object representation of a primitive type number object.
+package akash;
+import java.util.Date;
+
+public class example1{
+	
+	public static void main(String...args)
+	{
+		Integer x=10;
+		System.out.println(x.toString());
+		System.out.println(Integer.toString(12));
+	}
+}
+ 
+OUTPUT:
+10
+12
+
+ARRAYLIST:
+import java.util.ArrayList;
+
+public class dog{
+	public static void main(String...args)
+	{int total=0;
+		ArrayList<Integer>grades=new ArrayList<Integer>();
+		grades.add(98);
+		grades.add(79);
+		grades.add(48);
+		for(int i=0;i<grades.size();i++)
+		{
+			total+=grades.get(i);
+		}
+	System.out.println(total/grades.size());	
+}
+}
+OUTPUT:
+75
+
+
+import java.util.ArrayList;
+
+public class dog{
+	public static void main(String...args)
+	{	
+		ArrayList<Integer>names=new ArrayList<Integer>();
+		for(int i=1;i<10;i++)
+			names.add(i);
+		change(names);
+		display(names);
+    }
+
+	private static void display(ArrayList<Integer> names) {
+		for(int j=0;j<names.size();j++)
+			System.out.print(names.get(j)+" ");
+	}
+
+	private static void change(ArrayList<Integer> names) {
+		for(int i=0;i<names.size();i++)
+			names.set(i, names.get(i)+5);//set is used to change the content of array list
+		
+	}
+}
+OUTPUT:
+6 7 8 9 10 11 12 13 14 
+
+
+GENERATIN RANDOM NUMBERS:
+public class dog{
+	public static void main(String...args)
+	{	int number;
+	  Random ran=new Random(System.currentTimeMillis());
+	  number=ran.nextInt(100);
+	  System.out.println(number);
+	  
+	}	
+}
+
+FILLING ARRAYLIST USING RANDOM NUMBERS:
+import java.util.ArrayList;
+import java.util.Random;
+
+public class dog{
+	public static void main(String...args)
+	{	
+	  Random ran=new Random(System.currentTimeMillis());
+	  ArrayList<Integer>arr=new ArrayList<Integer>();
+	  for(int i=0;i<10;i++)
+	  {
+		  arr.add(ran.nextInt(100));
+	  }
+	  for(int i=0;i<arr.size();i++)
+		  System.out.println(arr.get(i));
+	}	
+}
+
+
+SEARCHING AN ARRAYLIST:
+import java.util.ArrayList;
+import java.util.Random;
+
+public class dog{
+	public static void main(String...args)
+	{ int x=5;
+	ArrayList<Integer>list=new ArrayList<Integer>();
+	Random ran=new Random(System.currentTimeMillis());
+	for(int i=0;i<10;i++)
+	{
+		list.add(ran.nextInt(10));
+	}
+	for(int i=0;i<list.size();i++)
+	{
+		if(list.get(i)==x)
+		{
+			System.out.println("element found at position:"+i);
+			x=0;
+			break;
+		}
+	}
+	if(x==5)
+		System.out.println("element not found");
+	}	
+}
+
+
+SORTING AN ARRAYLIST:
+public class dog{
+	public static void main(String...args)
+	{ int x=5;
+	ArrayList<Integer>list=new ArrayList<Integer>();
+	Random ran=new Random(System.currentTimeMillis());
+	for(int i=0;i<10;i++)
+	{
+		list.add(ran.nextInt(10));
+	}
+	for(int i=0;i<list.size()-1;i++)
+	{  
+		int j=i;
+		while(j>=0 && list.get(j)>list.get(j+1))//insertion sort
+		{
+			int temp=list.get(j);
+			list.set(j, list.get(j+1));
+			list.set(j+1, temp);
+			j--;
+		}
+	}
+	for(int j=0;j<list.size();j++)
+		System.out.print(list.get(j));
+
+	}
+
+}
+OUTPUT:
+0123377778
+
+
+FINDING MAX NUMBER IN AN ARRAY LIST:
+public class dog{
+	public static void main(String...args)
+	{ 
+		ArrayList<Integer>arr=new ArrayList<Integer>();
+		arr.add(25);
+		arr.add(35);
+		arr.add(89);
+		arr.add(98);
+		arr.add(32);
+		int max=arr.get(0);
+		for(int i=1;i<arr.size();i++)
+		{
+			if(arr.get(i)>max)
+				max=arr.get(i);
+		}
+		System.out.println("max element is:"+max);
+	}
+}
+OUTPUT:
+max element is 98
+
+FINDING PALINDROME NO's IN AN ARRAYLIST:
+public class dog{
+	public static void main(String...args)
+	{ int n,sum,rem;
+	ArrayList<Integer>arr=new ArrayList<Integer>();
+	arr.add(757);
+	arr.add(676);
+	arr.add(899);
+	arr.add(36);
+	arr.add(78);
+
+	for(int i=0;i<arr.size();i++)
+	{ n=arr.get(i);
+	sum=0;
+	while(n!=0)
+	{
+		rem=n%10;
+		sum=sum*10 +rem;
+		n=n/10;
+	}
+	if(sum==arr.get(i))
+		System.out.println("the no:"+arr.get(i)+" "+"is palindrome");
+	}
+
+	}
+}
+OUTPUT:
+the no:757 is palindrome
+the no:676 is palindrome
+
+
+
+SELECTION SORT USING ARRAYLIST:
+public class test2 {
+
+	public static void main(String...args)
+	{   
+		ArrayList<Integer>x=new ArrayList<Integer>();
+		for(int i=0;i<5;i++)
+		{
+			Scanner s=new Scanner(System.in);
+			System.out.println("Enter the element :");
+			x.add(s.nextInt());
+		}
+
+		for(int i=0;i<x.size()-1;i++)
+		{
+			int min=i;
+			for(int j=i+1;j<x.size();j++)
+			{
+				if(x.get(j)<x.get(min))
+					min=j; 
+			}
+			int temp=x.get(i);
+			x.set(i,x.get(min));
+			x.set(min,temp);	
+		}
+
+		for(int i=0;i<x.size();i++)
+			System.out.print(x.get(i)+" ");
+	}
+
+}
+
+
+
+PROGRAM TO REVERSE A STRING:
+public class dog{
+	public static void main(String...args)
+	{ 
+		String str="akash is a good boy.";
+		String rev="";
+		for(int i=str.length()-1;i>=0;i--)
+			rev=rev+str.charAt(i);
+
+		System.out.println(rev);
+	}
+}
+OUTPUT:
+.yob doog a si hsaka
+
+
+PROGRAM TO SEARCH A GIVEN STRING IN A PARAGRAPH AN FIND ITS COUNT:
+/*find the number of times a string appears in a sentence and find its count*/
+public class problem10 {
+
+	public static void main(String[] args) {
+		Scanner obj=new Scanner(System.in);
+		System.out.println("enter the paragraph");
+		String s=obj.nextLine();
+		System.out.println("enter the string you want to search:");
+		String k=obj.nextLine();
+		String s2="";
+		int count=0;
+		for(int i=0;i<=s.length();i++)
+		{
+			if(i!=s.length()&&s.charAt(i)!=32)
+			{
+				s2=s2+s.charAt(i);
+
+			}
+
+			else 
+			{if(s2.equals(k))
+				count++;
+
+			s2="";
+			}
+
+		}
+		if(count==0)
+			System.out.println("word not in sentence");
+		else
+			System.out.println("the word:"+k +" " +"occurs" +" "+ count+ " " + " "+"times");
+
+	}
+
+}
+
+
+PROGRAM TO IMPLEMENT split() FUNCTION IN OWN LOGIC:
+I have implemented split(char c,int k) not split(string c,int k):
+
+public class problem12 {
+
+	public static void main(String...args)
+	{   
+	
+		String str="welcome-to-tutorialspoint.com";
+		Scanner obj=new Scanner(System.in);
+		System.out.println("enter the string at which you want to split:");
+	    char c=obj.next().charAt(0);
+		//String m=obj.nextLine();
+	    System.out.println("enter the limit:");
+	    int k=obj.nextInt();
+	    problem12 obj1=new problem12();
+	    obj1.split(c, k, str);
+		
+	}
+	
+	
+	public void split(char c,int k,String str)
+	{   int x=1;
+		int pos=0;
+		String s="";
+		for(int i=0;i<str.length()-2;i++)
+		{     pos=i;
+              if(x<k)
+              {  
+			     if(str.charAt(i)!=c){
+				    s=s+str.charAt(i);
+				
+			       } 
+			     else{
+				   System.out.println(s);
+				   s="";
+				   x++;
+			    }
+              }
+              else
+            	  break;
+           
+
+		}
+		System.out.println(str.substring(pos));
+	}
+}
+enter the string at which you want to split:
+to
+enter the limit:
+2
+welcome-
+o-tutorialspoint.com
+
+
+PROGRAM TO FIND THE SECOND REPEATING CHARACTER IN A STRING:
+eg:java programming-r is the second repeating character-brute force solution
+public class test2 {
+	
+    public static void main(String a[]) {
+	test2 obj=new test2();
+	String s=" java pkopgramming";
+	char[] c=s.toCharArray();
+	int count=0;
+	char x=' ';
+	for(int i=0;i<c.length-1;i++)
+	{    
+		 if(x!=c[i])
+		 {
+		for(int j=i+1;j<c.length;j++)
+		{
+			if(c[i]==c[j])
+			{   x=c[i];
+				count++;
+				break;
+			}
+		}
+		 }
+		 if(count==2)
+		 {  System.out.println(c[i]);
+			 break;
+		 }
+		
+	}
+	
+    }
+}
+OUTPUT:
+the second repeating character is:
+p
+
+
+PROGRAM TO FIND DUPLICATED WORDS IN A PARAGRAPH:
+public class example1{
+	
+		public static void main(String[] a) {
+		 String s="akash is gud is akash";
+	      ArrayList<String>ar=new ArrayList<>();
+	      ar.add("akash");
+	      ar.add("is");
+	      ar.add("gud");
+	      ar.add("is");
+	      ar.add("akash");
+		  for(int i=0;i<ar.size()-1;i++)
+		  {
+			  for(int j=i+1;j<ar.size();j++)
+			  {
+				  if(ar.get(i).equals(ar.get(j)))
+				  {
+					  System.out.println("duplicate word:"+ar.get(i));
+				  }
+			  }
+		  }	 
+	}
+
+}
+OUTPUT:
+duplicate words are:
+akash is
+
+O(N)solution
+public class test2 {
+	
+    public static void main(String a[]) {
+     Scanner obj=new Scanner(System.in);
+     System.out.println("enter the string:");
+     String s=obj.nextLine();
+	String[] arr=s.split(" ");
+	java.util.Arrays.sort(arr);
+	
+	 String s2="";
+	 System.out.println("duplicate words are:");
+	 for(int i=0;i<arr.length-1;i++)
+	 {
+		  if(!s2.equals(arr[i]))
+		  {
+			   if(arr[i].equals(arr[i+1]))
+			   {
+				   System.out.println(arr[i]);
+				   s2=arr[i];
+			    
+		        }
+	       }
+    }
+}
+}
+
+
+
+
+
+PROGRAM TO REMOVE DUPLICATE ELEMENTS IN AN ARRAY WHILE SORTING IT USING COUNTING SORT:
+import java.io.*;
+import java.util.*;
+
+import org.omg.Messaging.SyncScopeHelper;
+/* Program to remove duplicate elements and sort the array*/
+public class test2 {
+	  
+	 public static void main(String a[]) throws IOException
+	 {  
+		 int x[]={3,4,3,2,1,0,4,2,3,600,80,12,311,123};
+		
+	     int count[]= new int[max(x)+1];
+	     int lengthNew=0;
+		 
+		for(int i=0;i<x.length;i++)
+		{
+			  if(count[x[i]]==1)
+			  {   lengthNew++;
+				  continue;
+			  }
+			  else
+				  count[x[i]]++;	
+		}
+		for(int i=1;i<count.length;i++)
+			count[i]=count[i]+count[i-1];
+		
+		int b[]= new int[x.length-lengthNew];
+		for(int i=0;i<x.length;i++)
+		{
+			b[count[x[i]]-1]=x[i];
+		}
+		for(int i=0;i<b.length;i++)
+			System.out.print(b[i]+" ");
+	 }
+
+	 public static int max(int[] x) {
+		int maxEl=x[0];
+		
+		for(int i=1;i<x.length;i++)
+		{
+			if(x[i]>maxEl)
+				maxEl=x[i];
+		}
+		 
+		return maxEl;
+		
+	}
+	 
+}
+OUTPUT:
+0 1 2 3 4 12 80 123 311 600 
+
+
+
+PROGRAM TO COUNT DUPLICATE ELEMENTS IN O(n)://add(integer) returns true if the element is not already present
+public class test2 {
+	  
+	 public static void main(String a[]) 
+	 {  
+		 int x[]={3,2,1,2,2,3,2,2,3,1,1,1};
+		  HashSet<Integer> hs= new HashSet<>();
+		  int count[]= new int[4];
+		  for(int i=0;i<x.length;i++)
+		  {
+			  if(!hs.add(x[i]) && count[x[i]]<1)
+			  {
+				  System.out.println("duplicate elements:"+x[i]);
+				  count[x[i]]++;
+			  }
+					  
+		  }
+		  System.out.println(hs);
+}
+}
+OUTPUT:
+
+
+PROGRAM TO FIND THE FIRST REPEATED ELEMENT:brute force
+
+public class test2 {
+	  
+	 public static void main(String a[]) 
+	 {  
+		 int x[]={3,9,2,0,2,1,6,0};
+		 int flag=0;
+		 for(int i=0;i<x.length-1;i++)
+		 {   if(flag==0)
+		 {
+			 for(int j=i+1;j<x.length;j++)
+			 {
+				 if(x[i]==x[j])
+				 {
+					 System.out.println("the first repeated element is:"+x[i]);
+					 flag++;
+					 break;
+				 }
+			 }
+		 }
+		 else
+			 break;
+			 
+		 }		 
+}
+}
+OUTPUT:
+The first repeated element is 2
+
+
+
+FIND TWO ELEMENTS WITH THE MINIMUM SUM:
+public class test2 {
+	  
+	 public static void main(String a[]) 
+	 {  
+		int x[]={1,60,-10,70,-80,85};
+		int minSum=100000;
+		int sum=0;
+		int m=0;
+		int k=0;
+		for(int i=0;i<x.length-1;i++)
+		{     m=i;
+			for(int j=i+1;j<x.length;j++)
+			{
+				sum=x[i]+x[j];
+				
+				if( Math.abs(sum)<minSum)
+				{
+					minSum=Math.abs(sum);
+					 k=j;
+				}
+			}
+		}
+		System.out.println(minSum +" "+x[m]+" "+x[k]);
+		
+}
+}
+OUTPUT:
+5 -80 85
+
+
+
+
+PROGRAM TO FIND THE COUNT OF DUPLICATE ELEMENTS USING HASHTABLES:
+import java.util.Hashtable;
+import java.util.Enumeration;
+
+public class test2 {
+
+	public static void main(String args[]) {
+
+		Hashtable<Integer,Integer> ht= new Hashtable<>();
+		int x[]={3,2,1,2,2,3,1,9};
+		Enumeration<Integer> emKey;
+		for(int i=0;i<x.length;i++)
+		{ int flag=0;
+			emKey=ht.keys();
+			while(emKey.hasMoreElements())
+			{
+				int k=emKey.nextElement();
+				if(k==x[i])
+				{
+					ht.replace(x[i], ht.get(x[i])+1);
+					flag++;
+					break;
+				}
+				
+			}
+			if(flag==0)
+				ht.put(x[i], 1);	
+		}
+       System.out.println(ht);	
+	}
+}
+OUTPUT:
+{9=1, 3=2, 2=3, 1=2}
+
+
+
+PROGRAM TO SWAP EDGE ELEMENTS OF AN N*N ARRAY:
+public class sample{
+	public static void main(String args[]) {
+		char x[][]={{'a','b','c','d'},{'e','f','g','h'},{'i','j','k','l'},{'m','n','o','p'}};
+		int top=0;
+		int bottom=x.length-1;
+		int left=0;
+		int right=x.length-1;
+		
+		while(top<bottom)
+		{
+			char topLeft=x[top][left];
+			char topRight=x[top][right];
+			char bottomRight=x[bottom][right];
+			char bottomLeft=x[bottom][left];
+			
+			x[top][right]=topLeft;
+			x[bottom][right]=topRight;
+			x[bottom][left]=bottomRight;
+			x[top][left]=bottomLeft;	
+			
+			
+			top++;
+			bottom--;
+			left++;
+			right--;
+		}
+	
+	for(int i=0;i<x.length;i++)
+	{
+		for(int j=0;j<x[i].length;j++)
+			System.out.print(x[i][j]+" ");
+		
+		System.out.println();
+	}
+		
+	
+}
+}
+OUTPUT:
+m b c a 
+e j f h 
+i k g l 
+p n o d 
+
+
+
+PROGRAM TO FIND OUT IF A MAGIC INDEX EXISTS
+package JDBCPack;
+import java.io.*;
+public class sample{
+	
+	public static void main(String args[])
+	{   int x[]={0,2,3,5,5,5,11,13,12};
+		int k=magicIndexSearch(x,0,x.length-1);
+		if(k!=-1)
+			System.out.println("magic index  is at positon:"+x[k]+" "+k);
+		else
+			System.out.println("no magic index");
+	}
+
+	public static int magicIndexSearch(int[] x, int low, int high) {
+		 if(low<high)
+		 {
+			 int mid=(low+high)/2;
+			 if(mid==x[mid])
+				 return mid;
+			 
+			 else if(x[mid]>mid)
+			 {    if(x[mid+1]==mid+1)
+				      return mid+1;
+			      else
+				    return magicIndexSearch(x, low, mid-1);
+			 }
+			 else{
+				    if(x[mid-1]==mid-1)
+				    	return mid-1;
+				    else
+				  	 return magicIndexSearch(x, mid+1, high);
+			 }
+			  
+		 }
+		 else
+			 return -1;
+		
+	}
+	
+}
+OUTPUT:
+magic index :5 5
+
+
+
+
+PROGRAM TO SORT AN ARRAY OF STRINGS SUCH THAT ALL ANAGRAMS ARE NEXT TO EACH OTHER:
+package akash;
+package akash;
+
+import java.io.*;
+ 
+public class test2{
+    
+	public static void main(String args[])
+	{
+		String s[]={"aka","bcg","aka","efg","aka","bcg","aka","hkg","efg"};
+		
+		for(int i=0;i<s.length-1;i++)
+		{
+			
+			for(int j=i+1;j<s.length;j++)
+			{
+				if(sort(s[i]).equals(sort(s[j])))
+				{
+					swap(++i,j,s);
+				}
+			}
+		}
+		for(int i=0;i<s.length;i++)
+			System.out.print(s[i]+" ");
+	}
+
+	private static void swap(int a, int b,String[] s) {
+		String temp=s[a];
+		s[a]=s[b];
+		s[b]=temp;
+		
+	}
+
+	private static String sort(String s) {
+		
+		char c[]=s.toCharArray();
+		java.util.Arrays.sort(c);
+		return new String(c);
+		
+	}
+}
+
+
+OUTPUT:
+aka aka aka aka bcg bcg efg efg hkg 
+
+
+
+
+PROGRAM TO FIND AN ELEMENT IN A SORTED ARRAY WHICH HAS BEEN ROTATED N NUMBER OF TIMES:
+
+package akash;
+
+import java.io.*;
+ 
+public class test2{
+    
+	public static void main(String args[])
+	{
+		
+		int x[]={15,16,19,20,25,1,3,4,5,7,10,14};
+		int target=5;
+		int k=search(x,0,x.length-1,target);
+		if(k!=-1)
+		System.out.println("the element is at position:"+k);
+		else
+			System.out.println("element not found!!");
+		
+	}
+
+	public static int search(int[] x, int low, int high,int target) {
+		 if(low<=high)
+		 {
+			 int mid=(low+high)/2;
+			 
+			 if(x[mid]==target)
+				 return mid;
+			 else if(target>x[mid])
+			 {
+				if(x[high]<target)
+					return search(x,low,mid-1,target);
+				else
+					return search(x,mid+1,high,target);
+			 }
+			 else
+			 {
+				 if(x[low]>target)
+					return search(x,mid+1,high,target);
+				 else
+					return search(x,low,mid-1,target);
+			 }	 
+		 }
+		
+		 else
+	      return -1;
+	}
+
+	
+}
+OUTPUT:
+the element is at position:8
+
+
+
+
+
+PROGRAM TO FIND THE POSITION OF AN ELEMENT IN AN ARRAY INTERPERSED WITH BLANK SPACES:
+package akash;
+
+import java.io.*;
+ 
+public class test2{
+    
+	public static void main(String args[])
+	{
+		
+		int x[]={4,' ',13,' ',' ',16,' ',' ',18,21};
+		int target=16;
+		int k=search(x,0,x.length-1,target);
+		if(k!=-1)
+		System.out.println("the element is at position:"+k);
+		else
+			System.out.println("element not found!!");
+		
+	}
+
+	public static int search(int[] x, int low, int high,int target) {
+		 if(low<=high)
+		 {   
+			 
+			 int mid=(low+high)/2;
+			 if(x[mid]==' ')
+				 mid++;
+			 
+			 if(x[mid]==target)
+				 return mid;
+			 
+			 else if(target>x[mid])
+			 {
+					return search(x,mid+1,high,target);
+			 }
+			 else
+			 {
+					return search(x,low,mid-1,target);
+			 }	 
+		 }
+		
+		 else
+	      return -1;
+	}
+
+	
+}
+OUTPUT:
+the element is at position:5
+
+
+
+PROGRAM TO FIND AN ELEMENT IN A M*N MATRIX WHERE ELEMENTS ARE SORTED ROWWISE AND COLUMN WISE:
+
+package akash;
+
+import java.io.*;
+ 
+public class test2{
+    
+	public static void main(String args[])
+	{
+		
+		int x[][]={{5,11,23,36},{35,61,79,131},{56,63,85,145}};
+		int target=23;
+		search(x, 0, x[0].length-1,target);
+		
+	}
+
+	public static void search(int[][] x, int row, int column,int target) {
+		
+                     if(row<x.length && column>=0)
+                     {
+                    	if(target==x[row][column]){
+                            System.out.println( "the element is at row "+row+" "+" and column " +column);
+                            return;
+                    	}
+                    			
+                    	
+                    	else if(target>x[row][column])
+                    		search(x,row+1,column,target);
+                    	
+                    	else
+                    		search(x,row,column-1,target);
+                    	 	 
+                     }
+                     else
+                     {
+                    	 System.out.println("element not found");
+                     }
+	  
+}
+}
+OUTPUT:
+the element is at row 0  and column 2
+
+
+
+RECURSION TO PRINT 1111:'
+package akash;
+
+import java.io.*;
+ 
+public class test2{
+    
+	public static void main(String args[])
+	{
+	    int n=4;
+		search(n);
+		
+	}
+
+	public static int search(int n) {
+		   
+		      if(n==0)
+		    	  return 1;
+		      
+		       
+		       int k= search(n-1); 
+		       System.out.print(k+" ");
+		       return k;
+		                     
+}
+}
+OUTPUT:
+1 1 1 1
+
+
+PROBLEM:
+Print all possible strings of length k that can be formed from a set of n characters:
+eg:
+Input: 
+set[] = {'a', 'b'}, k = 3
+
+Output:
+aaa
+aab
+aba
+abb
+baa
+bab
+bba
+bbb
+
+
+PROGRAM:
+
+public class tester{
+    public static void main(String[] args){
+	  
+    	 char c[]={'a','b'};
+    	 String s="";
+    	 printCombinations(c,s);
+    
+    	  	
+}
+
+	public static void printCombinations(char[] c, String s) {
+		 
+		
+		       
+		    	   //if the length of the combination is 3 we return from the current recursion
+		    	   if(s.length()==3){
+		    		   System.out.println(s);
+	
+		    		   return;
+		    	   }
+		    	   
+		    	   int i=0;
+		    	  //picking one element from the array and checking its combination with all the elements of the array (including itself) using
+		    	   //recursion
+		    	   while(i<c.length){
+		    		   //storing the current value of s so as to use it for backtracking
+		    		 String k=s;
+		    		 s=s+c[i];
+		    		 printCombinations(c, s);
+		    		 //backtracking the value of s
+		    		 s=k;
+		    		 i++;
+		    		     		   
+		    	   }
+		    	   	    	   
+		       }		      
+	
+}
+OUTPUT:
+
+aaa
+aab
+aba
+abb
+baa
+bab
+bba
+bbb
+
+
+PROGRAM TO CONVERT FROM DECIMAL TO BINARY:
+
+public class tester{
+    public static void main(String[] args){
+	  
+   int n=10;
+   convertToBinary(n);
+
+    	  	
+}
+
+	public static void convertToBinary(int n) {
+		 
+		if(n==0)
+			return;
+		
+		 convertToBinary(n/2);
+		 System.out.print(n%2+" ");
+		  
+		      
+	
+}
+}
+
+OUTPUT:
+1010
+
+
+PROGRAM to Print all possible combinations of r elements in a given array of size n
+Given an array of size n, generate and print all possible combinations of r elements in array. 
+For example, if input array is {1, 2, 3, 4} and r is 2, then output should be 
+{1, 2}, {1, 3}, {1, 4}, {2, 3}, {2, 4} and {3, 4}.
+
+
+class tester{
+   public static void main(String[] args){
+     
+ int newArr[]=new int[3];
+   int arr[]={1,2,3,4,5};
+   int index=0;
+   int j=0;
+   int count=0;
+  printCombo(arr,newArr,index,j,count);
+      
+}
+
+
+public static void printCombo(int arr[],int newArr[],int index,int j,int count){
+    
+if(count==3)
+   {
+     print(newArr,3);
+     count=0;
+      return;
+   }
+
+int k=j;
+for(int i=k;i<arr.length;i++){
+       newArr[index]=arr[i];
+      printCombo(arr,newArr,index+1,i+1,count+1);
+         
+   }
+
+}
+
+
+  public static void print(int arr[],int len){
+    
+ for(int i=0;i<len;i++)
+     System.out.print(arr[i]+" ");
+
+   System.out.println();
+
+}
+
+}
+
+OUTPUT:
+1 2 3 
+1 2 4 
+1 2 5 
+1 3 4 
+1 3 5 
+1 4 5 
+2 3 4 
+2 3 5 
+2 4 5 
+3 4 5 
+
+
+PROGRAM TO PRINT ALL PALINDROMIC PARTITIONS IN A STRING:
+class tester{
+	
+	public static void main(String args[]){
+        String s="akanitinpaap";
+        String rev="",k="";
+        int len=s.length();
+        int index=12;
+        boolean flag=true;
+        int count=0;
+        findPalindrome(s,k,rev,len,index,flag,count);
+    }
+
+    
+	public static void findPalindrome(String s,String k,String rev,int len,int  index,boolean flag,int count){
+        
+
+        if(k.length()>1)
+           {
+              rev=reverseString(k);
+              if(rev.equals(k))
+                      System.out.println(k);   
+           }
+        if(index==1 || index<=count)
+          return;
+   
+
+       int i=count;
+       while(i<len &&(flag==true || index==len )){
+                  flag=true;
+                 findPalindrome(s,s.substring(i,index),rev,len,index-1,flag,count);
+                  flag=!flag;
+                  i++;
+                  count=i;
+          }
+
+}
+ public static String reverseString(String k){
+
+  String rev="";
+   for(int j=k.length()-1;j>=0;j--){
+              rev+=k.charAt(j);
+
+        }
+
+  return rev;
+
+  }
+
+}
+
+OUTPUT:
+aka
+nitin
+iti
+paap
+aa
+
