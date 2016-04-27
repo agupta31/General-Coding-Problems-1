@@ -1979,3 +1979,46 @@ public static int findMax(int arr[],int low,int high){
 
 OUTPUT:
 500
+
+
+PROGRAM TO FIND A SINGLE FIXED POINT IN AN ARRAY:
+Input: arr[] = {-10, -5, 0, 3, 7}
+  Output: 3  // arr[3] == 3 
+
+Input: arr[] = {-10, -5, 3, 4, 7, 9}
+  Output: -1  // No Fixed Point
+
+
+class tester{
+	 public static void main(String args[]){
+		int arr[] = {-10, -5, 0, 3, 7};
+	       searchIndex(arr,0,arr.length-1);
+
+
+	}
+
+	public static void searchIndex(int arr[],int low ,int high){
+	      
+	      
+
+	      if(low>high){
+	         System.out.println("no fixed point exists"); 
+	           return;
+	          
+	           }
+
+	       int index=(low+high)/2;
+	             
+	      if(arr[index]==index)
+	         { 
+	             System.out.println("the index and number exists:"+index);
+	             return;
+	         }
+	       else if(index>arr[index])
+	            searchIndex(arr,index+1,high);
+	       else
+	         searchIndex(arr,low,index-1);
+	   
+	}
+	}
+
