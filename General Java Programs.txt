@@ -4656,3 +4656,34 @@ public static void main(String args[]) {
 
 OUTPUT:
 9
+
+
+
+RECURSIVE PROGRAM TO PRINT TRIANGULAR NUMBERS:
+triangular numbers:
+
+class dataEmpl{
+
+ public static void main(String[] args){
+
+     triangular(0,0);
+}
+
+public static void triangular(int n,int k){
+     
+    if(k==4){
+         return;
+      }
+
+    k++;
+
+    System.out.println(n+k);
+    triangular(n+k,k);
+
+
+}
+
+}
+
+OUTPUT:
+1 3 6 10 15 21 28 36 
