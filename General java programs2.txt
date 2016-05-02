@@ -2022,3 +2022,55 @@ class tester{
 	}
 	}
 
+
+
+PROGRAM TO FIND THE THIRD LARGEST NUMBER IN AN ARRAY:
+class dataEmpl{
+
+	   public static void main(String[] args){
+	     int arr[]={7,0,13,2,9,21,0,34,12};
+	      System.out.println(findMax3(arr));
+
+	}
+
+
+
+	public static int findMax3(int arr[]){
+	          
+	    for(int i=0;i<3;i++){
+	         int index=getMaximum(arr,i);
+	         swap(arr,i,index);     
+
+	        }
+	    return arr[2];
+
+	}
+	 
+	public static int getMaximum(int arr[],int i){
+	      
+	        int max=arr[i];
+	        int index=i;
+	            for(int j=i+1;j<arr.length;j++){
+	                    if(arr[j]>max){
+	                         max=arr[j];
+	                         index=j;
+	                         }
+	                }             
+
+	           
+	        return index;
+
+	} 
+
+	public static void swap(int arr[],int i,int index){
+	       
+	       int temp=arr[i];
+	         arr[i]=arr[index];
+	          arr[index]=temp;
+	      
+	}
+	        
+}
+
+OUTPUT:
+13	 
