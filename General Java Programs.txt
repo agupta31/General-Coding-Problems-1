@@ -4728,3 +4728,53 @@ class dataEmpl{
 
 OUTPUT:
 343    
+
+
+PROGRAM TO FIND ALL PERMUTATIONS OF A STRING:
+
+Below are the permutations of string ABC.
+ABC ACB BAC BCA CBA CAB
+
+
+public class test2{
+
+   public static void main(String[] args){
+
+        char str[]={'A','B','C'};
+        permutation(str,0,0);
+
+}
+
+public static void permutation(char str[],int j,int index){
+      if(index>=str.length){
+            return;
+       }
+
+     for(int i=index;i<str.length;i++){
+    	   char k[]=str;
+           swap(str,i,j); 
+           System.out.println(str);
+           permutation(str,j+1,j+2);
+           //backtracking
+            swap(str,i,j);
+   
+       }
+
+}
+
+
+public static void swap(char str[],int i,int j){
+    char temp=str[i];
+    str[i]=str[j];
+    str[j]=temp;
+
+}
+}
+
+OUTPUT:
+ABC
+ACB
+BAC
+BCA
+CBA
+CAB

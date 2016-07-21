@@ -2127,3 +2127,349 @@ public static void findProduct(int arr[],int prod[],int left[],int right[]){
 
 OUTPUT:
 180 600 360 300 900
+
+
+FIND OUT IF AN ARRAY CAN BE SPLIT INTO TWO PARTS WHICH GIVE EQUAL SUM:
+eq:[3,1,1,1]-->{3}{1,1,1}-->should return true
+[10,3,1];-->should return false
+class test2{
+   public static void main(String[] args){
+     int arr[]={3,1,2,2};
+     int endPt=arr.length-1;
+     System.out.println(sameSumArray(arr,endPt));
+
+    }
+
+public static boolean sameSumArray(int arr[],int endPt){
+    int l_sum=0;
+    int r_sum=0;
+      
+      if(endPt==0){
+          return false;
+       }
+      
+     for(int i=0;i<endPt;i++){
+          l_sum+=arr[i];
+       }
+
+     for(int j=endPt;j<arr.length;j++){
+           r_sum=arr[j];
+         }
+
+     if(l_sum==r_sum){
+        return true;
+       }
+     return sameSumArray(arr,endPt-1);
+ 
+}
+
+}
+
+OUTPUT:
+true
+
+FUNCTION TO FIND THE NTH NON REPEATING CHARACTER IN A STRING:
+
+function findNonRepeating(str,number){
+   var charCount={};
+   var len=str.length;
+   var char;
+   var flag=1;
+
+    for(var i=0;i<len;i++){
+        char=str[i];
+        if(!charCount[char]){
+            charCount[char]=1;
+        }
+        else{
+          charCount[char]++;
+        }
+    }
+
+    for(var j in charCount){
+        if(charCount[j]===1){
+             if(flag===number){
+                return j;
+             }
+             flag++;
+          }
+             
+       }
+
+    return "no non repeating characters found"
+}
+
+console.log(findNonRepeating("the quick brown fox jumps then quickly blows air",3));
+
+
+FUNCTION TO REMOVE DUPLICATE CHARACTERS FROM A STRING:
+
+function removeDuplicate(str){
+   var len=str.length;
+   var char;
+   var charCount={};
+   var newStr=[];
+
+   for(var i=0;i<len;i++){
+      char=str[i];
+      if(!charCount[char]){
+           charCount[char]=1;
+      }
+      else{
+         charCount[char]++;
+      }
+   }
+
+   for(var j in charCount){
+        if(charCount[j]===1)
+          newStr.push(j);
+   }
+   return newStr;
+}
+console.log(removeDuplicate("learn more javascript dude"));
+OUTPUT:
+Lnmojvsciptu
+
+
+FIND LARGEST SUM OF ANY TWO ELEMENTS:
+
+function findLargestSum(arr){
+    
+    var max=arr[0];
+    var maxSum=0;
+
+    for(var i=1;i<arr.length;i++){
+         if(arr[i]>max){
+           max=arr[i];
+         }
+    }
+
+    for(var j=0;j<arr.length;j++){
+        if(arr[j]!==max){
+           if(max+arr[j]>maxSum){
+              maxSum=max+arr[j];
+           }
+
+        }
+    }
+    return maxSum;
+}
+
+console.log(findLargestSum([2,4,1,12,0,3,8]));
+
+
+Maximum value K such that array has at-least K elements that are >= K
+
+O(n) solution:
+
+class test2{
+	 public static void main(String[] args){
+	     int arr[]={2, 3, 4, 5, 6, 7};
+	      System.out.println(findMaxVal(arr));
+	}
+
+
+	public static int findMaxVal(int arr[]){
+	  int n=arr.length;
+	 int count[]=new int[n+1];
+	   int sum=0;
+
+	   for(int i=0;i<n;i++){
+	       if(arr[i]<n){
+	          count[arr[i]]++;
+	        }
+	       else{
+	         count[n]++;
+	          }
+	    }
+
+	   for(int j=n;j>=0;j--){
+	        sum+=count[j];
+
+	       if(sum>=j){
+	          return j;
+	        }     
+	  
+	    }
+	    return -1;
+
+	}
+
+	}
+
+OUTPUT:
+4
+
+
+FIND THE COUNT OF EVEN AND ODD ELEMENTS IN THE ARRAY:
+class test2{
+	   public static void main(String[] args){
+	      int arr[]={1,2,2,3,4,1,5,7,8};
+	      int newArr[]=oddEvenCount(arr);
+
+	       System.out.println("even:"+newArr[0]);
+	        System.out.println("odd:"+newArr[1]);
+	  }
+
+
+	public static int[] oddEvenCount(int arr[]){
+
+	      int freq[]=new int[2];
+
+	      for(int i=0;i<arr.length;i++){
+	          freq[arr[i]%2]++;
+	       }
+
+	    return freq;
+	  }
+}
+
+
+
+
+GIVEN AN INPUT PRINT A STAIRCASE PATTERN:
+
+
+class test2{
+	   public static void main(String[] args){
+	             staircase(3);
+	         }
+
+	public static void staircase(int n){
+
+	      for(int i=1;i<=n;i++){
+	         for(int j=1;j<=n;j++){
+	              if(i+j>n){
+	                 System.out.print("#");
+	                 }
+	              else{
+	                  System.out.print(" ");
+	                 }
+	           }
+	         System.out.println();
+
+	      }
+	 }
+     }
+OUTPUT:
+
+      #
+    ##
+ ###
+ 
+
+
+ROTATE AN ARRAY K NUMBER OF TIMES AND PRINT THE ELEMENTS AT THE INDEXES WHICH THE USER INPUTS:
+
+class test2{
+    public static void main(String[] args){
+
+    	      Scanner scan=new Scanner(System.in);
+    	      System.out.println("enter array length:");
+    	        int n=scan.nextInt();
+    	        int arr[]=new int[n];
+    	        //enter array elements
+    	        System.out.println("enter the elements:");
+    	          for(int i=0;i<n;i++){
+    	        	  arr[i]=scan.nextInt(); 
+    	            }
+    	          
+    	        System.out.println("enter no of rotations:");
+    	        int k=scan.nextInt();
+    	        
+    	        System.out.println("enter query length:");
+    	        int q=scan.nextInt();
+    	        
+    	        int index[]=new int[q];
+    	        
+    	        System.out.println("enter the query indexes");
+    	         for(int j=0;j<index.length;j++){
+    	        	 index[j]=scan.nextInt();  
+    	         }
+    	       
+    	       
+    	
+            int head=arr.length-k;
+            int tail=head-1;
+
+          circularRotation(arr,head,tail,index);
+       }
+
+    public static void circularRotation(int arr[],int head,int tail,int index[]){
+          
+
+           int i=0;
+           int j=arr.length-1;
+        //reverse the array from 0 to tail
+           while(i<tail){
+               swap(i,tail,arr);
+                i++;
+                tail--;
+            }
+
+         //reverse the array from head to arr.length-1
+          while(head<j){
+              swap(j,head,arr);
+               head++;
+               j--;
+             }
+           i=0;
+           j=arr.length-1;
+      //final swap to rotate array
+          while(i<j){
+              swap(i,j,arr);
+               i++;
+               j--;
+             }
+          	System.out.println("the rotated array is:");
+	          for(int m=0;m<arr.length;m++){
+	              System.out.print(arr[m]+" ");
+	            }
+	          
+	          
+              System.out.println();
+          System.out.println("the elements at the specified indexes are:");
+             for(int l=0;l<index.length;l++){
+            	   System.out.println(arr[index[l]]);
+             }
+
+      }
+
+     public static void swap(int first,int second,int arr[]){
+               int temp=arr[first];
+               arr[first]=arr[second];
+               arr[second]=temp;
+          }
+}
+
+OUTPUT:
+enter array length:
+9
+enter the elements:
+3
+2
+5
+1
+6
+9
+11
+17
+19
+enter no of rotations:
+3
+enter query length:
+4
+enter the query indexes
+0
+8
+4
+6
+the rotated array is:
+11 17 19 3 2 5 1 6 9 
+the elements at the specified indexes are:
+11
+9
+2
+1
+
+	
