@@ -2674,7 +2674,7 @@ public static void removeDuplicate(int arr[],int limit){
         	   
                 else {
 		       left=right+1;
-		        right=(arr.length-limit)<limit?arr.length-1:(right+limit);
+		        right=(arr.length-right)<limit?arr.length-1:(right+limit);
 		         i=left;
 		         j=right;
 		  }
