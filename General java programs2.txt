@@ -2645,34 +2645,44 @@ k = 10
 Output:  
 [8, 7, 6, 5, 4, 3, 2, 1]
 
-O(n^2):
+O(n):
 
 class test2{
-	   public static void main(String[] args){
-	           int arr[]={1, 2, 3, 4, 5, 6, 7, 8, 9};
-	           int limit=6;
-	          removeDuplicate(arr,limit);
-	            for(int i=0;i<arr.length;i++){
-	               System.out.print(arr[i]+" ");  
-		    }
-	       }
+    public static void main(String[] args){
+         int arr[]={1, 2, 3, 4, 5, 6, 7, 8, 9};
+         int limit=5;
+         removeDuplicate(arr,limit);
+         for(int i=0;i<arr.length;i++){
+           System.out.print(arr[i]+" ");
+	}
+      }
 
-	public static void removeDuplicate(int arr[],int limit){
-	       int i=0;
-	        int k=limit-1;
-	          while(i<arr.length){
-	                    int j=k;
-	                     int m=i;
-
-	                   while(m<j){
-	                       int temp=arr[m];
-	                         arr[m]=arr[j];
-	                         arr[j]=temp;
-	                          m++;
-	                           j--;
-	                    }
-	                      i=k+1;
-	                      k=(arr.length-limit)<limit?arr.length-1:(k+limit);
-	              }
-	 }
+public static void removeDuplicate(int arr[],int limit){
+        int left=0;
+         int right=limit-1;
+          int i=left;
+          int j=right;
+         while(left<arr.length){
+              
+             if(i<j){
+            	  int temp=arr[i];
+   	              arr[i]=arr[j];
+  	              arr[j]=temp;
+                     i++;
+                     j--; 
+                 }  
+        	   
+                else {
+		       left=right+1;
+		        right=(arr.length-limit)<limit?arr.length-1:(right+limit);
+		         i=left;
+		         j=right;
+		  }
+		                
+         		}
+     
+     	}
 }
+
+OUTPUT:
+6 5 4 3 2 1 9 8 7
