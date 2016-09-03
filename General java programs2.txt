@@ -2686,3 +2686,138 @@ public static void removeDuplicate(int arr[],int limit){
 
 OUTPUT:
 6 5 4 3 2 1 9 8 7
+
+
+
+FIND NTH LARGEST NUMBER IN AN ARRAY:
+
+class test2{
+    public static void main(String[] args){
+	int arr[]={1,-2,3,16,12,20,17};
+	int target=3;
+	System.out.println(nMax(arr,0,0,target));
+     }
+
+public static int nMax(int arr[],int index,int maxVal,target){
+	 if(index==2){
+	    return maxVal;	
+	}
+	int max=arr[index];
+	for(int i=index+1;i<arr.length;i+=1){
+	   if(arr[i]>max){
+	     max=arr[i];
+	   }
+	}
+     	return secondMax(arr,index+1,max,target);
+
+   }
+}
+OUTPUT:
+16
+
+
+
+O(n):
+
+class test2{
+    public static void main(String[] args){
+	int arr[]={12, 13, 1, 10, 34, 16};
+	System.out.println(thirdMax(arr));
+     }
+
+public static int thirdMax(int arr[]){
+	int max=arr[0];
+	int max2=-123123;
+	int max3=-232212;
+   
+         for(int i=1;i<arr.length;i++){
+	    if(arr[i]>max){
+		max3=max2;
+		max2=max;
+		max=arr[i];
+	     }
+             else if(arr[i]>max2){
+ 		max3=max2;
+		max2=max3;
+                 }
+	  else if(arr[i]>max3){
+		max3=arr[i];
+	     }
+	}
+   	return max3;
+   }
+}
+
+
+LARGEST PRODUCT OF A SUBARRAY OF SIZE K:
+O(n^2):
+
+class test2{
+	   public static void main(String[] args){
+		int arr[]={1, 5, 9, 8, 2, 4, 1, 8, 1, 2};
+		int k=6; 
+		System.out.println("the max product is= "+maxSubarray(arr,k));
+	   }
+
+	public static int maxSubarray(int arr[],int size){
+	     int prod=1;
+	     int maxProd=-3242343;
+	     int start=-1;
+		 int newArr[]=new int[size];
+		
+	 	for(int i=0;i<=arr.length-size;i+=1){
+	 		
+		      for(int j=i;j<i+size;j++){
+		    	  prod*=arr[j];
+		      	}
+		      if(prod>maxProd){
+		    	  maxProd=prod;
+		    	  start=i;
+		      	}
+		      	prod=1;
+	 		}
+	 	    for(int i=start;i<start+size;i+=1){
+	 	    	System.out.print(arr[i]+" ");
+	 	    }
+	 	    System.out.println();
+		   return maxProd;
+	    }
+	}
+
+OUTPUT:
+9 8 2 4 1 8 
+the max product is= 4608
+
+
+O(n) solution:
+class test2{
+	   public static void main(String[] args){
+		int arr[]={1, 5, 9, 8, 2, 4, 1, 8, 1, 2};
+		int k=6;
+		System.out.println(maxSub(arr,k));
+	     }
+
+	public static int maxSub(int arr[],int size){
+	    int prod=1;
+	     int remProd=arr[0];
+	     int index=0;
+		for(int i=0;i<size;i+=1){
+		     prod*=arr[i];	
+		}
+		int maxProd=prod;
+
+	    	for(int j=1;j<=arr.length-size;j+=1){
+	    			prod=(prod/remProd)*arr[j+(size-1)];
+	    				if(prod>maxProd){
+	    					maxProd=prod;
+	    					index=j;
+	    				}
+	    				remProd*=arr[j];
+	    		}
+	    	    for(int k=index;k<index+size;k+=1){
+	    	    	System.out.print(arr[k]+" ");
+	    	    }
+	    	    System.out.println();
+	     		return maxProd;	
+	     }
+	}
