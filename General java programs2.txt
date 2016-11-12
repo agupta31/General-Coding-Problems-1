@@ -2933,5 +2933,108 @@ public static int searchNumber(int arr[],int target,int low,int high){
 
 
 
+FIND THE DIVISORS OF FACTORIAL OF A NUMBER:
+Input : n = 4
+Output: 24
+4! is 24. Divisors of 24 are 1, 2, 3, 4, 6,
+8, 12 and 24.
+
+class test2{
+	   public static void main(String[] args){
+		int n=4;
+		int fact=getFact(n);	
+		 getDivisors(fact);
+		}
+	public static int getFact(int n){
+	        if(n==1){
+		return n;
+	        } 
+
+	 	return n*getFact(n-1);	
+	   }
+
+	public static void getDivisors(int fact){
+		int rangeNum=0;
+	 	for(int i=2;i<fact;i+=1){
+		       if(Math.pow(i,2)>fact){
+			rangeNum=i;
+			break;
+		      }	
+		 }	
+	 	System.out.println("the factors are:");
+		 for(int j=1;j<rangeNum;j+=1){
+		      if(fact%j==0){
+			System.out.print(j+",");
+			System.out.print(fact/j+",");
+		      }	
+		 }
+	       }
+	}
 
 
+SUM OF SUBSET DIFFERENCES:
+Given a set S consisting of n numbers, find the sum of difference between last and first element of each subset. We find first and last element of every subset by keeping them in same order as they appear in input set S.
+
+i.e., sumSetDiff(S) = ? (last(s) – first(s)),
+where sum goes over all subsets s of S.
+
+class test2{
+    public static void main(String[] args){
+         int arr[]={5,2,9,6,7};
+        System.out.println(sumDiff(arr));
+}
+ public static int sumDiff(int x[]){
+        int sum=0,
+        	n=x.length;	
+  for(int set=1;set<n;set++){
+    for(int i=0;i<n-1;i++){
+           int k=set+i,
+        	   lastkPos=k;	   
+      for(int j=i+1;j<n;j++){
+    	  if(set==1){
+    		sum+=x[j]-x[i];
+    		System.out.println(set+":"+x[i]+","+x[j]);
+    	  }
+      else{
+         while(k<n){
+          sum+=x[k]-x[i];
+          System.out.println(set+":"+x[i]+","+x[j]+","+x[k]);
+           k++;
+            }
+           k=lastkPos+1;
+           lastkPos=k;
+          }	
+         }
+      }	
+   }
+     return sum;
+    }
+}
+
+OUTPUT:
+1:5,2
+1:5,9
+1:5,6
+1:5,7
+1:2,9
+1:2,6
+1:2,7
+1:9,6
+1:9,7
+1:6,7
+2:5,2,9
+2:5,2,6
+2:5,2,7
+2:5,9,6
+2:5,9,7
+2:5,6,7
+2:2,9,6
+2:2,9,7
+2:2,6,7
+2:9,6,7
+3:5,2,6
+3:5,2,7
+3:5,9,7
+3:2,9,7
+4:5,2,7
+52
